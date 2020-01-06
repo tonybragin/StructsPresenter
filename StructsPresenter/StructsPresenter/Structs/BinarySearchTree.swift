@@ -11,10 +11,10 @@ import Foundation
 struct BinarySearchTree<Key: Comparable, Value> {
     private class BinarySearchTreeNode {
         var key: Key
-        var value: Value
+        var value: Value?
         var left: BinarySearchTreeNode?
         var right: BinarySearchTreeNode?
-        init(key: Key, value: Value) {
+        init(key: Key, value: Value?) {
             self.key = key
             self.value = value
         }
@@ -32,11 +32,30 @@ struct BinarySearchTree<Key: Comparable, Value> {
     }
     private var head: BinarySearchTreeNode?
     init() {}
-    init(key: Key, value: Value) {
+    init(key: Key, value: Value?) {
         head = BinarySearchTreeNode(key: key, value: value)
     }
     // MARK: - Public Methods
-    mutating func add(key: Key, value: Value) {
+    subscript(key: Key) -> Value? {
+        get {
+            return valueForKey(key)
+        }
+        set {
+            if let item = item(for: key) {
+                switch item {
+                case .head:
+                    head?.value = newValue
+                case .left(let node):
+                    node.left?.value = newValue
+                case .right(let node):
+                    node.right?.value = newValue
+                }
+            } else {
+                add(key: key, value: newValue)
+            }
+        }
+    }
+    mutating func add(key: Key, value: Value?) {
         let newNode = BinarySearchTreeNode(key: key, value: value)
         switch addingItem(for: key) {
         case .head:
