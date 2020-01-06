@@ -41,29 +41,21 @@ struct BinarySearchTree<Key: Comparable, Value> {
             return valueForKey(key)
         }
         set {
-            if let item = item(for: key) {
-                switch item {
-                case .head:
-                    head?.value = newValue
-                case .left(let node):
-                    node.left?.value = newValue
-                case .right(let node):
-                    node.right?.value = newValue
-                }
-            } else {
-                add(key: key, value: newValue)
-            }
+            addValue(newValue, for: key)
         }
     }
-    mutating func add(key: Key, value: Value?) {
-        let newNode = BinarySearchTreeNode(key: key, value: value)
-        switch addingItem(for: key) {
-        case .head:
-            head = newNode
-        case .left(let leftNode):
-            leftNode.left = newNode
-        case .right(let rightNode):
-            rightNode.right = newNode
+    mutating func addValue(_ value: Value?, for key: Key) {
+        if let item = item(for: key) {
+            switch item {
+            case .head:
+                head?.value = value
+            case .left(let node):
+                node.left?.value = value
+            case .right(let node):
+                node.right?.value = value
+            }
+        } else {
+            add(key: key, value: value)
         }
     }
     func valueForKey(_ key: Key) -> Value? {
@@ -155,6 +147,18 @@ struct BinarySearchTree<Key: Comparable, Value> {
             node = node.left!
         }
         return .left(node)
+    }
+    // MARK: - Private Methods Addition
+    private mutating func add(key: Key, value: Value?) {
+        let newNode = BinarySearchTreeNode(key: key, value: value)
+        switch addingItem(for: key) {
+        case .head:
+            head = newNode
+        case .left(let leftNode):
+            leftNode.left = newNode
+        case .right(let rightNode):
+            rightNode.right = newNode
+        }
     }
     // MARK: - Private Methods Removal
     private func removeType(for node: BinarySearchTreeNode) -> RemoveType {
