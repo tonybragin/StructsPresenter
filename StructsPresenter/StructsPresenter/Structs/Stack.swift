@@ -13,6 +13,15 @@ struct Stack<Element> {
     var count: Int {
         return stack.count
     }
+    init () {}
+    init(element: Element) {
+        push(element)
+    }
+    init(array: [Element]) {
+        for item in array {
+            push(item)
+        }
+    }
     mutating func push(_ element: Element) {
         stack.append(element)
     }

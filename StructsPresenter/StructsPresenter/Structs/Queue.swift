@@ -13,6 +13,15 @@ struct Queue<Element> {
     var count: Int {
         return queue.count
     }
+    init () {}
+    init(element: Element) {
+        enqueue(element)
+    }
+    init(array: [Element]) {
+        for item in array {
+            enqueue(item)
+        }
+    }
     mutating func enqueue(_ element: Element) {
         queue.append(element)
     }
@@ -28,6 +37,15 @@ struct Deque<Element> {
     private var queue = [Element]()
     var count: Int {
         return queue.count
+    }
+    init () {}
+    init(element: Element) {
+        pushBack(element)
+    }
+    init(array: [Element]) {
+        for item in array {
+            pushBack(item)
+        }
     }
     mutating func pushBack(_ element: Element) {
         queue.append(element)
