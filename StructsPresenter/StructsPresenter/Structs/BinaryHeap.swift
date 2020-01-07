@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct MaxBinaryHeap<Element: Comparable> {
+struct BinaryHeap<Element: Comparable> {
+    private let decreasing: Bool
     private var heap = [Element]()
     var count: Int {
         return heap.count
@@ -16,20 +17,24 @@ struct MaxBinaryHeap<Element: Comparable> {
     var max: Element? {
         return heap.first
     }
-    init() {}
-    init(element: Element) {
+    init(decreasing: Bool) {
+        self.decreasing = decreasing
+    }
+    init(decreasing: Bool, element: Element) {
+        self.decreasing = decreasing
         add(element)
     }
-    init(array: [Element]) {
+    init(decreasing: Bool, array: [Element]) {
+        self.decreasing = decreasing
         for item in array {
             add(item)
         }
     }
     // MARK: - Static Methods
-    static func sort(array: [Element]) -> [Element] {
-        var newHeap = MaxBinaryHeap(array: array)
+    static func sort(decreasing: Bool, array: [Element]) -> [Element] {
+        var newHeap = BinaryHeap(decreasing: decreasing, array: array)
         var sorted = [Element]()
-        while let maxElement = newHeap.removeMax() {
+        while let maxElement = newHeap.removeHead() {
             sorted.append(maxElement)
         }
         return sorted
@@ -41,12 +46,12 @@ struct MaxBinaryHeap<Element: Comparable> {
     mutating func add(_ element: Element) {
         heap.append(element)
         var index = count
-        while index > 1 && heap[index-1] > heap[index / 2 - 1] {
+        while index > 1 && compare(first: heap[index-1], second: heap[index / 2 - 1]) {
             swap(between: index-1, and: index / 2 - 1)
             index /= 2
         }
     }
-    mutating func removeMax() -> Element? {
+    mutating func removeHead() -> Element? {
         if let max = max {
             swap(between: 0, and: count-1)
             heap.removeLast()
@@ -57,6 +62,13 @@ struct MaxBinaryHeap<Element: Comparable> {
         }
     }
     // MARK: - Private Methods
+    private func compare(first: Element, second: Element) -> Bool {
+        if decreasing {
+            return first > second
+        } else {
+            return first < second
+        }
+    }
     private mutating func swap(between firstIndex: Int,
                                and secondIndex: Int) {
         let first = heap[firstIndex]
@@ -70,10 +82,10 @@ struct MaxBinaryHeap<Element: Comparable> {
             let right = 2*index + 1
             var largest = index
             
-            if left <= count && heap[left-1] > heap[index-1] {
+            if left <= count && compare(first: heap[left-1], second: heap[index-1]) {
                 largest = left
             }
-            if right <= count && heap[right-1] > heap[largest-1] {
+            if right <= count && compare(first: heap[right-1], second: heap[largest-1]) {
                 largest = right
             }
             if largest == index {
