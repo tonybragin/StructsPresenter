@@ -17,6 +17,7 @@
 		EA77B26123C1F51B0055883A /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA77B26023C1F51B0055883A /* Stack.swift */; };
 		EA77B26323C1F7770055883A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA77B26223C1F7770055883A /* Queue.swift */; };
 		EA77B26523C1FC090055883A /* BinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA77B26423C1FC090055883A /* BinarySearchTree.swift */; };
+		EA77B26723C3453E0055883A /* BinaryHeap.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA77B26623C3453E0055883A /* BinaryHeap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		EA77B26023C1F51B0055883A /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		EA77B26223C1F7770055883A /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		EA77B26423C1FC090055883A /* BinarySearchTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarySearchTree.swift; sourceTree = "<group>"; };
+		EA77B26623C3453E0055883A /* BinaryHeap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryHeap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				EA77B26023C1F51B0055883A /* Stack.swift */,
 				EA77B26223C1F7770055883A /* Queue.swift */,
 				EA77B26423C1FC090055883A /* BinarySearchTree.swift */,
+				EA77B26623C3453E0055883A /* BinaryHeap.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA77B26723C3453E0055883A /* BinaryHeap.swift in Sources */,
 				EA77B23423C1F2380055883A /* ViewController.swift in Sources */,
 				EA77B26123C1F51B0055883A /* Stack.swift in Sources */,
 				EA77B23023C1F2380055883A /* AppDelegate.swift in Sources */,
